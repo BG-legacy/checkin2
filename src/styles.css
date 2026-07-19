@@ -1,0 +1,540 @@
+:root {
+  --ink: #1c1e21;
+  --ink-soft: #55595f;
+  --paper: #f5f5f2;
+  --card: #ffffff;
+  --line: #d9d9d4;
+  --accent: #2f4a6d;
+  --error: #9a3b3b;
+  --focus: #1a63c9;
+
+  /* Streamly (in-phone) palette, intentionally separate from survey chrome */
+  --streamly-brand: #6d3fc4;
+  --streamly-ink: #221f2b;
+  --streamly-line: #e2dfe9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Layout */
+.app {
+  min-height: 100vh;
+}
+
+.content {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 2rem 1.75rem;
+}
+
+.center-text {
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.75rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+.hint {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.required-mark {
+  color: var(--error);
+}
+
+.error-detail {
+  color: var(--error);
+}
+
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Progress bar */
+.progress-bar {
+  position: sticky;
+  top: 0;
+  height: 6px;
+  background: var(--line);
+  z-index: 10;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+/* Buttons (survey chrome) */
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--accent);
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Radio rows (screener, closing) */
+.screener {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+.screener legend {
+  font-weight: bold;
+  padding: 0 0.4rem;
+}
+
+.radio-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  cursor: pointer;
+}
+
+.radio-row input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--accent);
+}
+
+/* Walkthrough */
+.walkthrough {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 0 2rem;
+}
+
+.screen-counter {
+  margin: 0.75rem 0 0.5rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.walkthrough-nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Phone frame */
+.phone-frame {
+  width: 300px;
+  max-width: 100%;
+  border: 10px solid #2b2b2b;
+  border-radius: 28px;
+  background: #fff;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  color: var(--streamly-ink);
+}
+
+.phone-statusbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.7rem;
+  color: #888;
+  background: #fafafa;
+}
+
+.phone-appbar {
+  padding: 0.55rem 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--streamly-brand);
+  border-bottom: 1px solid var(--streamly-line);
+  background: #fafafa;
+}
+
+.phone-screen {
+  padding: 1rem 0.9rem 1.4rem;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.phone-title {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.phone-text {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #3c3946;
+}
+
+.phone-note {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #77737f;
+}
+
+.phone-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--streamly-line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.phone-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--streamly-line);
+}
+
+.phone-rows .phone-row:last-child {
+  border-bottom: none;
+}
+
+.phone-row-chevron {
+  color: #b6b2bf;
+}
+
+.phone-row-action {
+  border: 1px solid var(--streamly-line);
+  border-radius: 8px;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.phone-button {
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* Equal-weight pair used by Designs A and B */
+.phone-button-equal {
+  border: 1.5px solid #4a4656;
+  background: #f6f5f8;
+  color: #2c2936;
+}
+
+/* Large high-emphasis button used by dark-pattern screens */
+.phone-button-brand {
+  background: var(--streamly-brand);
+  color: #fff;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.phone-link {
+  text-align: center;
+  font-size: 0.85rem;
+  text-decoration: underline;
+}
+
+.phone-link-plain {
+  color: var(--streamly-ink);
+}
+
+/* Deliberately low-contrast dark-pattern link */
+.phone-link-faint {
+  color: #b3b0ba;
+  font-size: 0.75rem;
+}
+
+.phone-choices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.phone-choice {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--streamly-line);
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.phone-choice-radio {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 1.5px solid #8b8796;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.phone-bullets {
+  margin: 0;
+  padding-left: 1.3rem;
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* Likert ratings */
+.ratings {
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+}
+
+.likert {
+  border: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.likert:disabled {
+  opacity: 0.5;
+}
+
+.likert-question {
+  font-weight: bold;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.likert-scale {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.likert-endpoint {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+}
+
+.likert-options {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.likert-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.likert-option input {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--accent);
+  margin: 0;
+}
+
+.likert-option-label {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+/* Open text */
+.open-text {
+  display: block;
+  margin: 0 0 1.5rem;
+}
+
+.open-text span {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+}
+
+.open-text textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.6rem;
+  resize: vertical;
+  background: #fff;
+  color: var(--ink);
+}
+
+.open-text textarea:disabled {
+  background: var(--paper);
+  opacity: 0.6;
+}
+
+/* Results dashboard */
+.login-form input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.6rem;
+  background: #fff;
+  color: var(--ink);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  margin: 0 0 1.5rem;
+}
+
+.results-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.results-table th,
+.results-table td {
+  border: 1px solid var(--line);
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.results-table thead th {
+  background: var(--paper);
+}
+
+.results-table tbody th {
+  font-weight: normal;
+}
+
+.comments-group {
+  margin: 0 0 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.6rem 0.9rem;
+}
+
+.comments-group summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.comments-group ul {
+  margin: 0.6rem 0 0.25rem;
+  padding-left: 1.3rem;
+}
+
+.comments-group li {
+  margin-bottom: 0.4rem;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .content {
+    padding: 1.25rem 0.75rem 3rem;
+  }
+
+  .card {
+    padding: 1.5rem 1rem;
+  }
+
+  .likert-scale {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .likert-options {
+    gap: 0.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-bar-fill {
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
