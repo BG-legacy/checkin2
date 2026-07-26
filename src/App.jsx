@@ -13,6 +13,12 @@ import { insertResponse } from './lib/supabase.js';
 // Steps: intro, three designs, closing. Thank-you counts as full progress.
 const TOTAL_STEPS = 5;
 
+function isResultsRoute() {
+  if (window.location.hash.startsWith('#/results')) return true;
+  const path = window.location.pathname.replace(/\/$/, '') || '/';
+  return path === '/dashboard' || path === '/results';
+}
+
 export default function App() {
   // Shuffled once on mount and never re-shuffled.
   const [viewOrder] = useState(() => fisherYatesShuffle(DESIGN_IDS));
@@ -27,12 +33,16 @@ export default function App() {
   const [submitError, setSubmitError] = useState(null);
   const pendingRow = useRef(null);
 
-  // Minimal hash route for the password-protected results dashboard.
-  const [hash, setHash] = useState(window.location.hash);
+  // Results dashboard: /#/results, /dashboard, or /results
+  const [showResults, setShowResults] = useState(isResultsRoute);
   useEffect(() => {
-    const onHashChange = () => setHash(window.location.hash);
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    const syncRoute = () => setShowResults(isResultsRoute());
+    window.addEventListener('hashchange', syncRoute);
+    window.addEventListener('popstate', syncRoute);
+    return () => {
+      window.removeEventListener('hashchange', syncRoute);
+      window.removeEventListener('popstate', syncRoute);
+    };
   }, []);
 
   function handleScreener(answer) {
@@ -115,7 +125,7 @@ export default function App() {
 
   const currentDesignId = viewOrder[designIndex];
 
-  if (hash.startsWith('#/results')) {
+  if (showResults) {
     return (
       <div className="app">
         <main className="content">
